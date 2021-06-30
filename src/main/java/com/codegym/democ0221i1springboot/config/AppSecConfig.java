@@ -18,7 +18,7 @@ public class AppSecConfig extends WebSecurityConfigurerAdapter {
 
         User.UserBuilder users = User.withDefaultPasswordEncoder();
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-        manager.createUser(users.username("user").password("123456").roles("USER").build());
+        manager.createUser(users.username("user").password("123456").roles("KA").build());
         manager.createUser(users.username("admin").password("123456").roles("ADMIN").build());
         return manager;
 
@@ -28,7 +28,7 @@ public class AppSecConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/").permitAll()
                 .and()
-                .authorizeRequests().antMatchers("/user").hasRole("USER")
+                .authorizeRequests().antMatchers("/user").hasRole("KA")
                 .and()
                 .authorizeRequests().antMatchers("/tasks/**").hasRole("ADMIN")
                 .and()
